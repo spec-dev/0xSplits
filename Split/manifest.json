@@ -1,0 +1,12 @@
+{
+    "namespace": "station",
+    "name": "Split",
+    "version": "0.0.1",
+    "displayName": "Splits",
+    "description": "A split contract on the 0xSplits protocol.",
+    "chains": [
+        1,
+        5,
+        137
+    ]
+}

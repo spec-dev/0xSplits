@@ -1,0 +1,12 @@
+{
+    "namespace": "station",
+    "name": "Recipient",
+    "version": "0.0.1",
+    "displayName": "Split Recipients",
+    "description": "The recipients of a split contract.",
+    "chains": [
+        1,
+        5,
+        137
+    ]
+}
