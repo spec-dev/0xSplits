@@ -17,7 +17,7 @@ class Recipient extends LiveObject {
 
     // Allocation of the split.
     @Property()
-    allocation: BigInt
+    ownership: BigInt
 
     // ==== Call Handlers ===================
 
@@ -26,12 +26,11 @@ class Recipient extends LiveObject {
         const splitAddress = call.outputs.split
         const recipientAddresses = call.inputs.accounts || []
         const allocations = call.inputs.percentAllocations || []
-        
         await saveAll(...recipientAddresses.map((address, i) => (
             this.new(Recipient, {
                 address,
                 splitAddress,
-                allocation: BigInt.from(allocations[i]),
+                ownership: BigInt.from(allocations[i]),
             }))
         ))
     }
