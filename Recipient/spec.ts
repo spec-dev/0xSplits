@@ -23,12 +23,10 @@ class Recipient extends LiveObject {
 
     @OnCall('0xsplits.SplitMain.createSplit')
     async onCreateSplit(call: Call) {
-        const { inputs, outputs } = call
-        const splitAddress = outputs.split
-        const recipientAddresses = inputs.accounts || []
-        const allocations = inputs.percentAllocations || []
-
-        // Save all recipients of the split.
+        const splitAddress = call.outputs.split
+        const recipientAddresses = call.inputs.accounts || []
+        const allocations = call.inputs.percentAllocations || []
+        
         await saveAll(...recipientAddresses.map((address, i) => (
             this.new(Recipient, {
                 address,
