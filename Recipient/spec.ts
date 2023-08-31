@@ -4,7 +4,7 @@ import { LiveObject, Spec, Property, Call, OnCall, Address, BigInt, saveAll } fr
  * The recipients of a split contract.
  */
 @Spec({ 
-    uniqueBy: ['address', 'splitAddress', 'chainId']
+    uniqueBy: ['address', 'splitAddress', 'chainId'],
 })
 class Recipient extends LiveObject {
     // Address of the recipient.
@@ -24,15 +24,14 @@ class Recipient extends LiveObject {
     @OnCall('0xsplits.SplitMain.createSplit')
     async onCreateSplit(call: Call) {
         const splitAddress = call.outputs.split
-        const recipientAddresses = call.inputs.accounts || []
+        const accounts = call.inputs.accounts || []
         const allocations = call.inputs.percentAllocations || []
-        await saveAll(...recipientAddresses.map((address, i) => (
-            this.new(Recipient, {
-                address,
-                splitAddress,
-                ownership: BigInt.from(allocations[i]),
-            }))
-        ))
+        const recipients = accounts.map((address, i) => this.new(Recipient, {
+            address,
+            splitAddress,
+            ownership: BigInt.from(allocations[i]),
+        }))
+        await saveAll(...recipients)
     }
 }
 

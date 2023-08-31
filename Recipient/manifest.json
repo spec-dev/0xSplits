@@ -1,5 +1,5 @@
 {
-    "namespace": "station",
+    "namespace": "0xsplits",
     "name": "Recipient",
     "version": "0.0.1",
     "displayName": "Split Recipients",
